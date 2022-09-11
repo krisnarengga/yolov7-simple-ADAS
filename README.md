@@ -11,3 +11,5 @@ python detect_adas.py --weights yolov7-tiny.pt --view-img --nosave --source "das
 Notes:
 You can download yolov7-tiny or yolov7 weights from YOLOV7 assets repository https://github.com/WongKinYiu/yolov7/releases
 
+App Demo:
+https://youtu.be/ccjNwJsEvw4
