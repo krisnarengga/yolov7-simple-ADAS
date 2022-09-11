@@ -131,8 +131,10 @@ def detect(save_img=False):
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
             
 
-            my_x1 = 750
-            my_x2 = 1100
+            #my_x1 = 750
+            #my_x2 = 1100
+            my_x1 = 200
+            my_x2 = 1700
             my_y1 = 1050
             my_y2 = 1050
             my_color = (0,255,0)
@@ -161,11 +163,12 @@ def detect(save_img=False):
                     c1, c2 = (int(xyxy[0]), int(xyxy[1])), (int(xyxy[2]), int(xyxy[3]))
                     midpoint_x = c1[0]+((c2[0]-c1[0])/2)
                     midpoint_y = c2[1]
+                    y_level = c2[1] - 20
 
                     if(c!=0):
-                        if ( ((c1[0] >= my_x1) and (c1[0] <= my_x2)) and (c2[1] >= my_y1)) or ( ((c2[0] <= my_x2) and (c2[0] >= my_x1)) and (c2[1] >= my_y1) or ((midpoint_x >= my_x1) and (midpoint_x <= my_x2) and (midpoint_y >= my_y1)) ):
-                            im0 = cv2.line(im0, (c1[0],c2[1]), (c2[0],c2[1]), (0,0,255), 3)                        
-                            im0 = cv2.putText(im0, 'WARNING: JARAK KENDARAAN TERLALU DEKAT', (600,400), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 6, cv2.LINE_AA)
+                        if ( ((c1[0] >= my_x1) and (c1[0] <= my_x2)) and (y_level >= my_y1)) or ( ((c2[0] <= my_x2) and (c2[0] >= my_x1)) and (y_level >= my_y1) or ((midpoint_x >= my_x1) and (midpoint_x <= my_x2) and (y_level >= my_y1)) ):
+                            im0 = cv2.line(im0, (c1[0],c2[1]-20), (c2[0],c2[1]-20), (0,0,255), 3)                        
+                            im0 = cv2.putText(im0, 'WARNING: VEHICLE DISTANCE TOO CLOSE', (400,400), cv2.FONT_HERSHEY_SIMPLEX, 1.5,(0,0,255), 6, cv2.LINE_AA)
                             warning = True
                             cv2.rectangle(im0, c1, c2, (0,0,255), 3, lineType=cv2.LINE_AA)
                             '''
@@ -179,16 +182,16 @@ def detect(save_img=False):
                                    print ("Error: unable to start speaker thread")                        
                             '''
                         else:
-                            im0 = cv2.line(im0, (c1[0],c2[1]), (c2[0],c2[1]), (0,255,0), 3)
+                            im0 = cv2.line(im0, (c1[0],y_level), (c2[0],y_level), (0,255,0), 3)
 
             txt_pos = (700, 804)              
             fontScale = 1               
             if (warning == True):
                 im0 = cv2.line(im0, (my_x1,my_y1), (my_x2,my_y2), (0,0,255), 3)
-                im0 = cv2.putText(im0, 'Safety Distance Level', (my_x1,my_y1+30), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0,0,255), 2, cv2.LINE_AA)
+                im0 = cv2.putText(im0, 'Safety Distance Level', (my_x1+600,my_y1+30), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0,0,255), 2, cv2.LINE_AA)
             else:
                 im0 = cv2.line(im0, (my_x1,my_y1), (my_x2,my_y2), (0,255,0), 3)
-                im0 = cv2.putText(im0, 'Safety Distance Level', (my_x1,my_y1+30), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0,255,0), 2, cv2.LINE_AA)
+                im0 = cv2.putText(im0, 'Safety Distance Level', (my_x1+600,my_y1+30), cv2.FONT_HERSHEY_SIMPLEX, fontScale, (0,255,0), 2, cv2.LINE_AA)
 
             warning = False
             
@@ -198,7 +201,7 @@ def detect(save_img=False):
 
             # Stream results
             if view_img:
-                im0 = cv2.resize(im0, (800, 600))                 
+                im0 = cv2.resize(im0, (1280, 860))                 
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
 
