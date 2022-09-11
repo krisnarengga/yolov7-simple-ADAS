@@ -1,5 +1,5 @@
 # yolov7-simple-ADAS
-Simple Driving - Adaptive Detection System (ADAS) based on YOLOV7
+Simple Assistance Driving System (ADAS) based on YOLOV7
 
 This app is demonstrate simple Adaptive Detection System (ADAS) to invoke early warning system to driver when driver vehicle too close to another vehicles
 
