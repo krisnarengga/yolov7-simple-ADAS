@@ -13,3 +13,6 @@ You can download yolov7-tiny or yolov7 weights from YOLOV7 assets repository htt
 
 App Demo:
 https://youtu.be/ccjNwJsEvw4
+
+Sample Dashcam Video:
+https://drive.google.com/file/d/1u9sJlskOg4w2plPAxRgen0JKkTLi3Bbe/view?usp=sharing
